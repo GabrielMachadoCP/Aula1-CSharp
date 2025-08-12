@@ -21,18 +21,18 @@ class Program
                     CadastrarAluno(db);
                     break;
                 case "2":
-                    //ListarAlunos(db);
+                    ListarAlunos(db);
                     break;
                 case "3":
-                    //ExcluirAlunos(db);
+                    ExcluirAlunos(db);
                     break;
                 
                 case "4":
-                    //CadastrarMateria(db);
+                    CadastrarMateria(db);
                     break;
 
                 case "5":
-                    //ListarMateria(db);
+                    ListarMateria(db);
                     break;
                 case "6":
                     //CadastrarNota(db);
@@ -46,6 +46,7 @@ class Program
             }
         }
     }
+
 
     private static void DesenhaMenu()
     {
@@ -86,33 +87,35 @@ class Program
         Console.ReadKey();
         
     }
-    
-    // private static void CadastrarMateria(DatabaseHelper db)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    // private static void ListarMateria(DatabaseHelper db)
-    // {
-    // }
+    private static void ExcluirAlunos(DatabaseHelper db)
+    {
+        Console.WriteLine("Digite o ID do aluno a ser excluído: ");
+        var idAluno = Convert.ToInt32(Console.ReadLine());
+        db.ExcluirAlunos(idAluno);
+    }
 
-    // private static void  CadastrarNota(DatabaseHelper db)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    private static void ListarAlunos(DatabaseHelper db)
+    {
+        db.ListarAlunos();
+    }
 
-    // private static void ListarAlunos(DatabaseHelper db)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    
-    // private static void ExcluirAlunos(DatabaseHelper db)
-    // {
-    //     throw new NotImplementedException();
-    // }
-    //
-    // private static void CadastrarAluno(DatabaseHelper db)
-    // {
-    //     throw new NotImplementedException();
-    // }
+    private static void CadastrarMateria(DatabaseHelper db)
+    {
+        Console.Write("Nome: ");
+        var nome = Console.ReadLine();
+
+        Console.Write("Carga Horaria: ");
+        var cargaHoraria = Convert.ToInt32(Console.ReadLine());
+
+        var curso = new Materia { Nome = nome, CargaHoraria = cargaHoraria };
+        db.CriarMateria(curso);
+
+        Console.WriteLine("Materia cadastrada com sucesso! Pressione qualquer tecla para continuar.");
+        Console.ReadKey();
+    }
+    private static void ListarMateria(DatabaseHelper db)
+    {
+        db.ListarMateria();
+    }
+
 }
